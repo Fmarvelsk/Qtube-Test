@@ -43,6 +43,7 @@ export default function PersonalInfo({nextStep, Personal}) {
             <label className="required">Email Address</label><br />
             <input type="text" className="input" value={emailAddress} 
             onChange={(e) => {
+                /* eslint-disable-next-line */
                 let test =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
                 setEmailAddress(e.target.value)
                 if(e.target.value.match(test)){
