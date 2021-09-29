@@ -68,7 +68,7 @@ export default function PersonalInfo({nextStep, Personal}) {
                     <label>State</label><br />
 
                     <select className="input" value={state} onChange={ (e) => setState(e.target.value)}>
-                        {State.map((state, i) => <option value={state}>{state}</option> )}
+                        {State.map((state, i) => <option value={state} key={i}>{state}</option> )}
                         
                     </select>
                 </div>
