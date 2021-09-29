@@ -2,12 +2,12 @@ import React from 'react'
 
 export default function Success() {
     return (
-        <div class="succ">
+        <div className="succ">
             <div className="b-g pb-g">
-                <label class="_label">
-                    <span class="label__text">
-                        <span class="label__check">
-                            <i class="fa fa-check icon"></i>
+                <label className="_label">
+                    <span className="label__text">
+                        <span className="label__check">
+                            <i className="fa fa-check icon"></i>
                         </span>
                     </span>
                 </label>
@@ -18,7 +18,9 @@ export default function Success() {
                 </div>
                 <div
                     style={{
-                        marginTop: '1.5rem'
+                        marginTop: '1.5rem',
+                        paddingBottom: '2rem'
+                        
                     }}>
 
                     <a className="return"

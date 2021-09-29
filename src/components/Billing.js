@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
+import Cleave from 'cleave.js/react';
 
-export default function Billing({ nextStep, goBack }) {
+export default function Billing({ nextStep, goBack, Personal, personal }) {
     const [cardName, setCardName] = useState(""),
         [cardNo, setCardNo] = useState(""),
         [cardEx, setCardEx] = useState(""),
         [cvvNo, setCvvNo] = useState(""),
-        [error, setError] = useState(""),
-        [valid, setValid] = useState(),
-        [isValid, setIsValid] = useState(false)
+        [selectCard, setSelectCard] = useState("")
 
     const nextForm = (e) => {
         e.preventDefault()
         let data = {
-            ...cardName,
-            ...cardNo,
-            ...cvvNo,
-            ...cardEx
+            cardName,
+            cardNo,
+            cvvNo,
+            cardEx
         }
         nextStep()
-        console.log(data)
+        Personal({
+            ...personal,
+            ...data
+        })
 
     }
 
@@ -29,7 +31,7 @@ export default function Billing({ nextStep, goBack }) {
 
             <label className="required">Card Type</label><br />
 
-            <select className="input" required>
+            <select className="input cursor" value={selectCard} onChange={(e) => setSelectCard(e.target.value)} required>
                 <option value="visa">VISA</option>
                 <option value="masterCard">MASTER CARD</option>
                 <option value="verve">VERVE</option>
@@ -38,16 +40,33 @@ export default function Billing({ nextStep, goBack }) {
             <div className="flex w-100">
                 <div className="mw-2">
                 <label className="required">Card Details</label><br />
-                <input type="text" className="input" value={cardNo} onChange={(e) => setCardNo(e.target.value)} required />
-                   </div>
+                <Cleave placeholder="Enter your credit card number"
+                className="input"
+                options={{creditCard: true}}
+                value={cardNo}
+                onChange={ (e) => setCardNo(e.target.value)}
+                />
+                    </div>
+
                     <div className="w-1">
                 <label className="required">Expiry date</label><br />
-                <input type="text" className="input" value={cardEx} onChange={(e) => setCardEx(e.target.value)} required />
+                <Cleave placeholder="MM/YY"
+                options={{date: true, datePattern: ["m", "d"] }}
+                className="input"
+                value={cardEx}
+                onChange={(e) => setCardEx(e.target.value)}
+                required
+                />
+               
                     </div>
 
                 <div className="w-1">
                     <label className="required">CVV</label><br />
-                    <input type="number" className="input" maxlength="3" value={cvvNo} onChange={(e) => setCvvNo(e.target.value)} required />
+                    <input type="number" className="input" value={cvvNo} placeholder="CVV" onChange={(e) => {
+                        if(e.target.value.length < 4)
+                        setCvvNo(e.target.value)
+                        
+                        }} required />
                 </div>
             </div>
 
@@ -62,8 +81,7 @@ export default function Billing({ nextStep, goBack }) {
                     Cancel Payment
                 </button>
             </div>
-            {error ? <div className="err-msg">{error}</div> : null}
-
+ 
         </form>
 
     )

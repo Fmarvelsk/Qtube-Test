@@ -8,6 +8,7 @@ import Success from './components/Success';
 
 function App() {
   const [step, setStep] = useState(1)
+  const [personal, setPersonal] = useState({})
 
   const nextStep = () => {
     setStep(step + 1)
@@ -33,12 +34,12 @@ function App() {
         <span className={ step === 1 ? "slider" : step === 2 ? "slider2" : "slider3"}></span>
         <hr />
       </div>
-      </div>
+      </div>{console.log(personal)}
       <div className="form">
         {step === 1 ?
-          <PersonalInfo nextStep={nextStep} />
+          <PersonalInfo nextStep={nextStep} Personal={setPersonal}/>
           : step === 2 ?
-            <Billing nextStep={nextStep} goBack={goBack} />
+            <Billing nextStep={nextStep} Personal={setPersonal} goBack={goBack} personal={personal}/>
             : step === 3 ?
               <ConfirmPayment nextStep={nextStep} goBack={goBack}/>
               : <Success goBack={goBack} />}

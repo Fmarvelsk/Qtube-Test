@@ -1,29 +1,37 @@
 import React, { useState } from 'react'
 import { State } from './data'
 
-export default function PersonalInfo({nextStep}) {
+export default function PersonalInfo({nextStep, Personal}) {
     const [ name, setName ] = useState(""),
           [ emailAddress, setEmailAddress ] = useState(""),
           [address, setAddress ] = useState(""),
           [secondAddress, setSecondAddress2] = useState(""),
           [localGov, setLocalGov] = useState(""),
-          [state, setState] = useState(""),
+          [state, setState] = useState("Abia"),
           [error, setError] = useState(""),
           [valid, setValid] = useState(),
           [isValid, setIsValid] = useState(false)
           
     const nextForm = (e) => {
         e.preventDefault()
-        let ds = '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'
         if(emailAddress.length === 0 || !isValid ){
-            setError('Email is required')
-            
+            setError('Email is required')      
         }
         else{
+            let data = {
+                name,
+                emailAddress,
+                address,
+                secondAddress,
+                state,
+                localGov  
+
+            }
+            Personal(data)
             setError('')
             nextStep()
         }
-        console.log('moving')
+        console.log('next')
         
     }
    
@@ -59,7 +67,7 @@ export default function PersonalInfo({nextStep}) {
                 <div className="select">
                     <label>State</label><br />
 
-                    <select className="input" onChange={ (e) => setState(e.target.value)}>
+                    <select className="input" value={state} onChange={ (e) => setState(e.target.value)}>
                         {State.map((state, i) => <option value={state}>{state}</option> )}
                         
                     </select>
