@@ -21,7 +21,6 @@ function App() {
       <div className={ step > 3 ? 'hide' : null}>
       <header className="App-headr">
         <h1 className="cyn-color">Complete your purchase</h1>
-        <button onClick={() => setStep(step +1)}>Click</button>
       </header>
       <div className="row">
         <p className={step === 1 ? 'p-color-slider' : 'p-color'}>Personal Info</p>
