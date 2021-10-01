@@ -129,6 +129,10 @@ label{
 
 .form{
   margin-top: 1.5rem;
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;
+  -webkit-animation: fadein 3s;
+  -o-animation: fadein 3s;
 } 
 .select{
   width: 25% !important;

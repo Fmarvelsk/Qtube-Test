@@ -33,7 +33,7 @@ function App() {
         <span className={ step === 1 ? "slider" : step === 2 ? "slider2" : "slider3"}></span>
         <hr />
       </div>
-      </div>{console.log(personal)}
+      </div>
       <div className="form">
         {step === 1 ?
           <PersonalInfo nextStep={nextStep} Personal={setPersonal}/>
